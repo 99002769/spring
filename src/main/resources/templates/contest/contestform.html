@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contest Registration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+          
+     
+</head>
+<style>
+body{
+	background-color: lightblue;
+	font-weight: bold;
+  
+}
+h2{
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+	color: black;
+	border: 3px solid black;
+	text-align: center;
+}
+div{
+ margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+	
+</style>
+<body>
+<div class="container">
+
+    <h2>Registration Form</h2>
+    <div>
+        <form class="form-horizontal" th:object="${contestForm}" th:action="@{/contest}" method="post">
+
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <p th:text="#{form.hasErrors}">Error Message</p>
+            </div>
+
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">PARTICIPANT NAME :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{name}" th:errorclass="has-error"/>
+
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" th:class="${#fields.hasErrors('contestName')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">CONTEST NAME :</label>
+                <div class="col-sm-10">
+                   <!-- <input type="number" min="0" max="5000" step="0.01" class="form-control" th:field="*{price}" th:errorclass="has-error"/>-->
+					 <input type="text" class="form-control" th:field="*{contestName}" th:errorclass="has-error"/>
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('contestName')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" th:class="${#fields.hasErrors('teamName')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">TEAM NAME :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{teamName}" th:errorclass="has-error"/>
+
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('teamName')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group" th:class="${#fields.hasErrors('teamSize')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">TEAM SIZE :</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{teamSize}" th:errorclass="has-error"/>
+
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('teamSize')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <button type="submit" class="btn btn-default">SUBMIT</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

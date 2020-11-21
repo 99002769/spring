@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contest Registration - List Participants Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<style>
+
+body{
+	background-color: lightblue;
+	font-family: "Times New Roman", Times, serif;
+	
+}
+#test {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#test td, #test th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#test tr{background-color: #f2f2f2;}
+
+#test tr:hover {background-color: #ddd;}
+
+#test th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: blue;
+  color: white;
+}
+h1{
+border: 3px solid black;
+	text-align: center;
+}
+h2{
+	text-align: center;
+}
+</style>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(contests)}">
+    	<h1>CONTEST REGISTRATION</h1>
+        <h2>PARTICIPANTS LIST</h2>
+        <table class="table table-striped" id="test">
+            <tr>
+                
+                <th>PARTICIPANT NAME</th>
+                <th>CONTEST NAME</th>
+                <th>TEAM NAME</th>
+                <th>TEAM SIZE</th>
+                <th>VIEW</th>
+                <th>EDIT</th>
+                <th>DELETE</th>
+            </tr>
+            <tr th:each="contest : ${contests}">
+                
+                <td th:text="${contest.name}"></td>
+                <td th:text="${contest.contestName}"></td>
+                <td th:text="${contest.teamName}"></td>
+                <td th:text="${contest.teamSize}"></td>
+                <td><a th:href="${'/contest/show/' + contest.id.toHexString()}">View</a> </td>
+                <td><a th:href="${'/contest/edit/' + contest.id.toHexString()}">Edit</a> </td>
+                <td><a th:href="${'/contest/delete/' + contest.id.toHexString()}">Delete</a> </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/contest/new">New Contest Registration</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
